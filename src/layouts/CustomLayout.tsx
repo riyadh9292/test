@@ -31,31 +31,16 @@ export default function CustomLayout({ children }:any) {
       gsap.set(mainContent, { opacity: 1, scale: 1, force3D: true, backfaceVisibility: "hidden" });
       let tween = gsap.timeline()
       .to(mainContent, {
-        opacity: 1, // Fade in
-        scale: 0.99, // Grow to full size
-        duration: 1, // Duration of the animation
-        ease: "power3.out", // Smooth easing for a polished effect
+        opacity: 1,
+        scale: 0.99,
+        duration: 1,
+        ease: "power3.out", 
       })
       .to(mainContent, {
-        y: "-2%", // Subtle upward motion
-        duration: 0.5, // Slightly faster secondary motion
-        ease: "power2.inOut", // Smooth easing
+        y: "-2%",
+        duration: 0.5,
+        ease: "power2.inOut",
       });
-      // let tween = gsap.timeline()
-      // .to(mainContent, {
-      //   opacity: 1,
-      //   y: "0%",
-      //   duration: 1.2,
-      //   ease: "power2.inOut",
-      // })
-      // .to(mainContent, {
-      //   y: "-1%",
-      //   duration: 1,
-      //   ease: "power1.inOut",
-      // });
-      // let tween = gsap.timeline().to(mainContent, { opacity: 1, duration: 0.5, ease: "power4.out" });
-
-      // let tween = gsap.to(mainContent, { y :"0.25%", duration: 1, ease: "power4.out"});
 
 
       ScrollTrigger.create({
@@ -107,6 +92,69 @@ export default function CustomLayout({ children }:any) {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []); 
+
+
+//   useEffect(() => {
+//         if (
+//         !containerRef.current ||
+//         !titleRef.current ||
+//         !mainContentRef.current
+//         ) {
+//         return;
+//         }
+//         const title = titleRef.current;
+//         const container = containerRef.current;
+//         const mainContent = mainContentRef.current;
+
+//         const timeout = setTimeout(() => {
+//         gsap.set(container, { y: "100%" });
+
+//         ScrollTrigger.create({
+//             trigger: title,
+//             start: "top bottom",
+//             end: () => `+=${container.getBoundingClientRect().height}`,
+//             pin: mainContent,
+//             pinSpacing: false,
+//             onEnter: () => {
+//             gsap.to(container, {
+//                 y: 0,
+//                 duration: 1,
+//                 ease: "power2.out",
+//             });
+//             },
+//             onLeaveBack: () => {
+//             gsap.to(container, {
+//                 y: "100%",
+//                 duration: 1,
+//                 ease: "power2.out",
+//             });
+//             },
+//         });
+//         ScrollTrigger.refresh();
+
+//         return () => {
+//             ScrollTrigger.killAll();
+//         };
+//         }, 500);
+//         return () => {
+//         clearTimeout(timeout);
+//         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+//         };
+//   }, []);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      ScrollTrigger.refresh();
+    });
+  
+    if (mainContentRef.current) {
+      resizeObserver.observe(mainContentRef.current);
+    }
+  
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   return (
     <div className="flex flex-col ">
