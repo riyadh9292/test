@@ -158,7 +158,7 @@ export default function CustomLayout({ children }:any) {
   }, []);
 
   return (
-  <LenisScrollComponent>
+//   <LenisScrollComponent>
     <div className="flex flex-col ">
       <Header />
       <main ref={mainContentRef} className="flex-grow bg-gray-100 ">
@@ -173,6 +173,6 @@ export default function CustomLayout({ children }:any) {
         <Footer />
       </footer>
     </div>  
-   </LenisScrollComponent>
+   // </LenisScrollComponent>
   );
 }
