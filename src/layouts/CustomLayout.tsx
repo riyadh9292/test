@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from 'react';
+import LenisScrollComponent from '@/components/LenisScrollComponent';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -157,6 +158,7 @@ export default function CustomLayout({ children }:any) {
   }, []);
 
   return (
+  <LenisScrollComponent>
     <div className="flex flex-col ">
       <Header />
       <main ref={mainContentRef} className="flex-grow bg-gray-100 ">
@@ -170,6 +172,7 @@ export default function CustomLayout({ children }:any) {
       <footer style={{ minHeight: "100vh", transform: "translateZ(0)", willChange: "transform" }} ref={containerRef} className="lg:relative bg-black text-white h-[calc(100vh+180px)] sm:h-auto  z-[2] overflow-x-hidden overflow-y-hidden">
         <Footer />
       </footer>
-    </div>
+    </div>  
+   </LenisScrollComponent>
   );
 }
